@@ -1,0 +1,287 @@
+﻿<Window x:Class="CyberSecurityChatbot_PART_2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="CyberSecurity Chatbot" Height="650" Width="500"
+        Background="#0A192F">
+
+    <!-- 
+    This is the main layout container for the chatbot window.
+    Margin creates spacing between the window edges and content.
+    -->
+    <Window.Resources>
+        <!-- Quiz styling to match splash screen colors -->
+        <Style x:Key="QuizChoiceButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Cyan"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Padding" Value="8,6"/>
+            <Setter Property="Margin" Value="4"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+
+        <Style x:Key="QuizControlButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Magenta"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Padding" Value="6,4"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+    </Window.Resources>
+
+    <TabControl Margin="10" Background="#0A192F">
+        <TabItem Background="#0A192F">
+            <TabItem.Header>
+                <TextBlock Text="Chatbot" Foreground="Magenta" FontWeight="Bold"/>
+            </TabItem.Header>
+            <Grid>
+
+                <!-- 
+        Row definitions divide the window into sections:
+        Row 1 = Header
+        Row 2 = Chat area
+        Row 3 = Input area
+        -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+
+        <!-- HEADER SECTION -->
+        <!-- 
+        This section displays the chatbot title
+        and slogan at the top of the application.
+        -->
+        <StackPanel Grid.Row="0" HorizontalAlignment="Center">
+
+            <!-- Main chatbot heading -->
+            <TextBlock Text="🦋
+WELCOME TO UNIQUA SAFESPACE 🦋
+"
+               Foreground="Magenta"
+               FontSize="22"
+               FontWeight="Bold"
+               HorizontalAlignment="Center"/>
+
+            <!-- Chatbot slogan/description -->
+            <TextBlock Text="Your cybersecurity chatbot, a Safe Space for Smarter Cyber Choices"
+               Foreground="Magenta"
+               FontSize="12"
+               HorizontalAlignment="Center"/>
+
+        </StackPanel>
+
+        <!-- CHAT AREA -->
+        <!-- 
+        This area displays messages between
+        the user and chatbot.
+        
+        ScrollViewer allows scrolling when
+        messages become too many.
+        -->
+        <ScrollViewer Grid.Row="1"
+              x:Name="ChatScroll"
+              VerticalScrollBarVisibility="Auto"
+              Background="#112240"
+              Margin="5">
+
+            <!-- 
+            ChatPanel stores all message bubbles
+            for both user and chatbot.
+            -->
+            <StackPanel x:Name="ChatPanel"
+                Margin="10">
+            </StackPanel>
+
+        </ScrollViewer>
+
+        <!-- INPUT AREA -->
+        <!-- 
+        This section contains the textbox
+        where the user types messages
+        and the Send button.
+        -->
+        <Grid Grid.Row="2">
+
+            <!-- Creates two columns:
+            Column 1 = Textbox
+            Column 2 = Send button
+            -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="120"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- User input textbox -->
+            <!-- 
+            Allows users to type messages.
+            Pressing Enter also sends a message.
+            -->
+            <TextBox x:Name="UserInput"
+                     Grid.Column="0"
+                     Height="40"
+                     Margin="0,0,10,0"
+                     FontSize="14"
+                     KeyDown="UserInput_KeyDown"
+                     VerticalContentAlignment="Center"/>
+
+            <!-- Send button -->
+            <!-- 
+            Sends the user's message to the chatbot
+            when clicked.
+            -->
+            <Button Content="Send"
+                    Grid.Column="1"
+                    Height="40"
+                    Background="#FFF100FF"
+                    Foreground="Black"
+                    FontWeight="Bold"
+                    Click="SendButton_Click"/>
+            
+        </Grid>
+            </Grid>
+        </TabItem>
+
+        <TabItem Background="#0A192F">
+            <TabItem.Header>
+                <TextBlock Text="Activity Log" Foreground="Magenta" FontWeight="Bold"/>
+            </TabItem.Header>
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Activity Log"
+                   FontSize="20"
+                   FontWeight="Bold"
+                   Foreground="LightGray"
+                   Margin="0,0,0,10"/>
+
+                <ScrollViewer Grid.Row="1" Background="#112240" Margin="0,0,0,10">
+                <TextBlock x:Name="ActivityLogText" Foreground="Magenta" TextWrapping="Wrap" Margin="4"/>
+                </ScrollViewer>
+
+                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                    <Button Content="Show Recent (5)" Width="120" Height="30" Click="ShowRecentActivity_Click"/>
+                    <Button Content="Show More" Width="90" Height="30" Margin="6,0,0,0" Click="ShowMoreActivity_Click"/>
+                </StackPanel>
+            </Grid>
+        </TabItem>
+
+        <TabItem Background="#0A192F">
+            <TabItem.Header>
+                <TextBlock Text="Task Assistant" Foreground="Magenta" FontWeight="Bold"/>
+            </TabItem.Header>
+            <Grid Margin="10">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Title -->
+                <TextBlock Text=" Task Assistant"
+                   FontSize="20"
+                   FontWeight="Bold"
+                   Foreground="Magenta"
+                   Margin="0,0,0,10"/>
+
+                <!-- Input row -->
+                <StackPanel Grid.Row="1" Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                        <TextBlock Text="Title:" Foreground="Magenta" VerticalAlignment="Center" Width="50"/>
+                        <TextBox x:Name="TaskInput" Width="300" Height="30" FontSize="14" VerticalContentAlignment="Center" ToolTip="Enter task title"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                        <TextBlock Text="Description:" Foreground="Magenta" VerticalAlignment="Top" Width="80"/>
+                        <TextBox x:Name="DescriptionInput" Width="300" Height="70" FontSize="13" TextWrapping="Wrap" AcceptsReturn="True" ToolTip="Enter task description"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                        <TextBlock Text="Reminder:" Foreground="Magenta" VerticalAlignment="Center" Width="60"/>
+                        <TextBox x:Name="ReminderInput" Width="160" Height="30" FontSize="14" VerticalContentAlignment="Center" ToolTip="Optional reminder text"/>
+
+                        <Button x:Name="AddTaskButton" Content="Add Task" Width="100" Height="30" Margin="10,0,0,0" Background="#FF00C2FF" Foreground="Black" FontWeight="Bold" Click="AddTask_Click"/>
+                        <Button Content="Delete" Width="80" Height="30" Margin="8,0,0,0" Background="Red" Foreground="White" FontWeight="Bold" Click="DeleteTask_Click"/>
+                        <Button Content="Set Reminder" Width="100" Height="30" Margin="8,0,0,0" Background="#FFA500" Foreground="White" FontWeight="Bold" Click="SetReminder_Click"/>
+                    </StackPanel>
+                </StackPanel>
+                
+
+
+                <!-- Task list and details -->
+                <DockPanel Grid.Row="2" Margin="0,10,0,0">
+                    <ListBox x:Name="TaskList" Width="260" Background="#112240" Foreground="Magenta" MouseDoubleClick="TaskList_MouseDoubleClick" SelectionChanged="TaskList_SelectionChanged"/>
+
+                    <StackPanel Margin="12,0,0,0">
+                        <TextBlock Text="Task Details" FontSize="16" FontWeight="Bold" Foreground="LightGray"/>
+                        <TextBlock x:Name="TaskDetailsText" Foreground="Cyan" TextWrapping="Wrap" Width="200" Margin="0,6,0,0"/>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <Button Content="Mark Complete" Width="110" Height="30" Background="#00C853" Foreground="White" Click="MarkComplete_Click"/>
+                            <Button Content="Edit Selected" Width="100" Height="30" Margin="8,0,0,0" Background="#2196F3" Foreground="White" Click="EditSelected_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DockPanel>
+
+            </Grid>
+        </TabItem>
+
+        <TabItem Background="#0A192F">
+            <TabItem.Header>
+                <TextBlock Text="Quiz" Foreground="Magenta" FontWeight="Bold"/>
+            </TabItem.Header>
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Cybersecurity Quiz"
+                   FontSize="20"
+                   FontWeight="Bold"
+                   Foreground="Magenta"
+                   Margin="0,0,0,10"/>
+
+                <StackPanel Grid.Row="1" Margin="0,10,0,10">
+                    <!-- Separate title and choices text so question always appears clearly -->
+                    <TextBlock x:Name="QuizQuestionTitle"
+                               Text="Press Start to begin the quiz"
+                               Foreground="Magenta"
+                               FontSize="18"
+                               FontWeight="Bold"
+                               TextWrapping="Wrap"
+                               Margin="0,0,0,6"/>
+
+                    <TextBlock x:Name="QuizQuestionText"
+                               Text=""
+                               Foreground="Cyan"
+                               FontSize="16"
+                               TextWrapping="Wrap"
+                               Margin="0,0,0,10"/>
+
+                    <StackPanel x:Name="QuizChoicesPanel" Orientation="Vertical" HorizontalAlignment="Left" Background="#112240"/>
+
+                    <!-- New results area: shows summary and wrong details -->
+                    <TextBlock x:Name="QuizResultText"
+                               Text=""
+                               Foreground="LightGray"
+                               FontSize="13"
+                               TextWrapping="Wrap"
+                               Margin="0,10,0,0"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Button Content="Start Quiz" Width="100" Height="35" Click="StartQuiz_Click" Style="{StaticResource QuizControlButtonStyle}"/>
+                    <Button Content="Next" Width="80" Height="35" Margin="10,0,0,0" Click="NextQuiz_Click" Style="{StaticResource QuizControlButtonStyle}"/>
+                    <!-- New Done button to finish and show full results anytime -->
+                    <Button Content="Done" Width="80" Height="35" Margin="10,0,0,0" Click="DoneQuiz_Click" Style="{StaticResource QuizControlButtonStyle}"/>
+                    <TextBlock x:Name="QuizStatusText" Foreground="Cyan" Margin="10,6,0,0" FontWeight="Bold"/>
+                </StackPanel>
+            </Grid>
+        </TabItem>
+    </TabControl>
+</Window>
