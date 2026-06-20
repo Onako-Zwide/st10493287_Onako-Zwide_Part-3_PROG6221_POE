@@ -23,3 +23,13 @@ CyberSecurity Chatbot is a WPF desktop application developed in C# using .NET 8.
 - User memory system.
 - Returning-user recognition.
 - Expanded cybersecurity topics.
+## Part 3 Features
+
+### Task Assistant with Reminders
+
+- Add tasks.
+- View tasks.
+- Mark tasks as complete.
+- Delete tasks.
+- Optional reminders.
+- Persistent JSON storage using tasks.json.
