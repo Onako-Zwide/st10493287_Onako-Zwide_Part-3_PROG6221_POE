@@ -60,3 +60,6 @@ CyberSecurity Chatbot is a WPF desktop application developed in C# using .NET 8.
 - Supports viewing additional entries.
 
 ---
+
+### Workflow Pass Screenshot
+<img width="1364" height="687" alt="Screenshot 2026-06-20 214613" src="https://github.com/user-attachments/assets/d006070a-ff8f-42e5-9848-a0bfa2320345" />
