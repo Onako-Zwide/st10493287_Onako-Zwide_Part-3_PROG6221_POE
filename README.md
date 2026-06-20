@@ -43,3 +43,12 @@ CyberSecurity Chatbot is a WPF desktop application developed in C# using .NET 8.
 - Score tracking.
 - Final score and performance message.- Optional reminders.
 - Persistent JSON storage using tasks.json.
+
+
+### NLP Simulation
+
+- Understands different user phrasings.
+- Detects task requests.
+- Detects reminder requests.
+- Detects quiz requests.
+- Detects activity log requests.
