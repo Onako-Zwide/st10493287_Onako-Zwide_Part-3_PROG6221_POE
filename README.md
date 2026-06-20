@@ -52,3 +52,11 @@ CyberSecurity Chatbot is a WPF desktop application developed in C# using .NET 8.
 - Detects reminder requests.
 - Detects quiz requests.
 - Detects activity log requests.
+
+### Activity Log
+
+- Records important actions.
+- Displays recent actions.
+- Supports viewing additional entries.
+
+---
