@@ -15,3 +15,11 @@ CyberSecurity Chatbot is a WPF desktop application developed in C# using .NET 8.
 - Personalized greeting.
 - Interactive cybersecurity conversations.
 - Cybersecurity awareness topics.
+## Part 2 Features
+
+- Keyword recognition.
+- Sentiment detection.
+- Context-aware follow-up responses.
+- User memory system.
+- Returning-user recognition.
+- Expanded cybersecurity topics.
